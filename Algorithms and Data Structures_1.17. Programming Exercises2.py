@@ -1,3 +1,4 @@
+# 10.Research other types of gates that exist (such as NAND, NOR, and XOR). Add them to the circuit hierarchy. How much additional coding did you need to do?
 class LogicGate:
 
 	def __init__(self,n):
@@ -11,22 +12,21 @@ class LogicGate:
 		self.output = self.performGateLogic()
 		return self.output
 
-
 		
 
 class BinaryGate(LogicGate):
 
 	def __init__(self,n):
-		LogicGate.__init__(self,n)   # The BinaryGate class will be a subclass of LogicGate and will add two input lines. 
+		LogicGate.__init__(self,n) 
 
 		self.pinA = None
 		self.pinB = None
 
-	def getPinA(self):               # FROM/INPUT
+	def getPinA(self): 
 		if self.pinA == None:
-			return int(input("Enter Pin A input for gate "+self.getLabel()+"-->"))         # input 1: externally
+			return int(input("Enter Pin A input for gate "+self.getLabel()+"-->")) 
 		else:
-			return self.pinA.getFrom().getOutput()                                         # input 2: from the output of a gate that is connected to that input line
+			return self.pinA.getFrom().getOutput()  
 
 	def getPinB(self):
 		if self.pinB == None:
@@ -34,7 +34,7 @@ class BinaryGate(LogicGate):
 		else:
 			return self.pinB.getFrom().getOutput()                                         
 
-	def setNextPin(self,source):     # TO/OUTPUT
+	def setNextPin(self,source):    
 		if self.pinA == None:        
 			self.pinA = source
 		else:
@@ -46,7 +46,7 @@ class BinaryGate(LogicGate):
 class UnaryGate(LogicGate):
 
 	def __init__(self,n):
-		LogicGate.__init__(self,n)   # The UnaryGate class will also subclass LogicGate but will have only a single input line. 
+		LogicGate.__init__(self,n)
 
 		self.pin = None
 
@@ -61,8 +61,6 @@ class UnaryGate(LogicGate):
 			self.pin = source
 		else:
 			print("Cannot Connect: NO EMPTY PINS on this gate")
-
-
 
 
 
@@ -106,48 +104,17 @@ class NotGate(UnaryGate):
 			return 1
 		else:
 			return 0	
-						
-					
-#~ LogicGate(label,output = self.performGateLogic())
-#~ | 
-#~ BinaryGate(LogicGate,pinA,pinB)
-#~ | 
-#~ AndGate(BinaryGate,performGateLogic)
 
 
 
-
-#~ g1 = AndGate("G1")
-#~ print(g1.getOutput())                        # ! subclass has definition of performGateLogic(method of parent class)
-#~ Enter Pin A input for gate G1-->1
-#~ Enter Pin B input for gate G1-->0            # 0
-
-
-
-#~ g2 = OrGate("G2")
-#~ print(g2.getOutput())
-#~ Enter Pin A input for gate G2-->1
-#~ Enter Pin B input for gate G2-->0            # 1
-
-
-
-#~ g3 = NotGate("G3")
-#~ print g3.getOutput()
-#~ Enter Pin input for gate G3-->0              # 1
-
-
-
-
-
-class Connector:                                # HAS-A relationships
+class Connector:                              
 
 	def __init__(self, fgate, tgate):
 		self.fromgate = fgate
 		self.togate = tgate
 
-		tgate.setNextPin(self)                  # The call to setNextPin is very important for making connections.
-												# g3.setNextPin(c1), setNextPin(self,c1)
-
+		tgate.setNextPin(self)                 
+												
 	def getFrom(self):
 		return self.fromgate
 
