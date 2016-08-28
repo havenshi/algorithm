@@ -174,5 +174,3 @@ print g4.getOutput()
 #~ Pin A input for gate G2-->1
 #~ Pin B input for gate G2-->1
 #~ 0
-
-
